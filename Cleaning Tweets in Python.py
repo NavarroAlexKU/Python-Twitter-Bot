@@ -13,6 +13,7 @@ def clean_tweets(text):
     2.) remove all non letters and lower case tweets:
     3.) replace retweets with empty string:
     4.) strip characters from left to right
+    5.) remove emojis and pictures
     
     Arguments:
         text(object): tweet as a string data type to clean
@@ -20,10 +21,17 @@ def clean_tweets(text):
     Returns:
         clean_tweets with no URL links, only non letters and all lower case text, replaces 'RT' with empty string and strips characters from left to right.
     """
-    # remove URL links:
+# remove URL links:
     text = re.sub(r"http\S+", "", text)
     # remove all non-letters and lower case tweets: replace 'rt' with empty string: strip characters from left to right
     text = re.sub('[^a-z\s]', '', text.lower()).replace('rt', '').strip()
+    # set removal pattern:
+    emoji_pattern = re.compile("["
+        u"\U0001F600-\U0001F64F"
+        u"\U0001F300-\U0001F5FF"
+        "]+",flags=re.UNICODE)
+    # remove emojis, symbols, and pictographs from tweets:
+    text = emoji_pattern.sub(r'',text)
     # return clean tweets:
     return text
 
