@@ -21,7 +21,7 @@ def clean_tweets(text):
     Returns:
         clean_tweets with no URL links, only non letters and all lower case text, replaces 'RT' with empty string and strips characters from left to right.
     """
-# remove URL links:
+    # remove URL links:
     text = re.sub(r"http\S+", "", text)
     # remove all non-letters and lower case tweets: replace 'rt' with empty string: strip characters from left to right
     text = re.sub('[^a-z\s]', '', text.lower()).replace('rt', '').strip()
